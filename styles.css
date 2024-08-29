@@ -1,0 +1,55 @@
+:root {
+    --background-light: #f6f8f8;
+
+    --background-dark: #060808;
+
+}
+
+/* Elements */
+
+body {
+    background-color: var(--background-light) !important;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    font-family: 'Tommy', sans-serif;
+}
+
+/* Home */
+
+.content {
+    width: 850px;
+}
+
+.font {
+    font-family: 'Gilgan', sans-serif;
+}
+
+/* Fonts */
+
+@font-face {
+    font-family: 'Gilgan';
+    src: url('fonts/Gilgan.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Tommy';
+    src: url('fonts/Tommy.otf') format('opentype');
+}
+
+/* Media queries */
+
+@media (max-width: 1200px) {
+    .content {
+        width: 600px;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        width: 100vw;
+    }
+}
+
