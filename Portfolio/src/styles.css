@@ -9,7 +9,7 @@
     --gradient-light: linear-gradient(135deg, #f98ffd  0%, #fdc78d 22.5%, #fdc78d 27.5%, #f98ffd  50%, #fdc78d 72.5%, #fdc78d 77.5%, #f98ffd  100%);
     --gradient-btn-light: linear-gradient(135deg, #fdc78d 0%, #fdc78d 10%, #f98ffd 33%, #fdc78d 66%, #fdc78d 76%, #f98ffd 100%);
     --highlight-light: #f0aac1;
-    --highlight-accent-light: #ff8575;
+    --highlight-accent-light: #ffd375;
     --border-light: solid 1px #d7d7d7;
 
     --background-dark: #060808;
@@ -341,7 +341,6 @@ a.active {
 .required {
     color: #e60e33;
     margin-top: -5px;
-    display: none;
 }
 
 .highlight {

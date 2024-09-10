@@ -1,12 +1,14 @@
-import pfp from "/pfp.png"
-import React, { useContext, useState, useRef, useEffect } from 'react'
-import { useLocation, Route, Routes, NavLink, useNavigate } from "react-router-dom"
+import pfp from '/pfp.png';
+import React, { useContext, useState, useRef, useEffect } from 'react';
+import { useLocation, Route, Routes, NavLink, useNavigate } from 'react-router-dom';
 import { annotate, annotationGroup } from 'rough-notation';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
 
 const pageDataContext = React.createContext();
 
-const clickSound = new Audio('/click6.mp3');
-const soundEffect = new Audio('/switch.mp3');
+const emailSound = new Audio('/sent.mp3');
+const themeSound = new Audio('/switch.mp3');
 
 export default function App() {
   const page = useRef();
@@ -61,8 +63,8 @@ function animate(nav, page) {
 function updateTheme(page, nav) {
   animate(nav, page);
 
-  soundEffect.currentTime = 0;
-  soundEffect.play();
+  themeSound.currentTime = 0;
+  themeSound.play();
   let theme = localStorage.getItem('theme');
   // If theme is dark set theme to light
   if (theme === 'dark') {
@@ -83,10 +85,9 @@ function About() {
   useEffect(() => {
     const text = paragraph.current.querySelectorAll('.highlight');
     var group = [];
-
     text.forEach((word, index) => {
-      let annotation = annotate(word, {type: 'underline', multiline: true, animationDuration: 100});
-      annotation.color = 'var(--highlight)';
+      let annotation = annotate(word, {type: 'highlight', multiline: true, animationDuration: 100});
+
       if (index % 2 === 0) {
         annotation.color = 'var(--highlight)';
       }
@@ -96,9 +97,8 @@ function About() {
 
       group.push(annotation);
     });
-
     const newgroup = annotationGroup(group);
-    setTimeout(() => newgroup.show(), 100);
+    //setTimeout(() => newgroup.show(), 100);
   }, []);
 
   return (
@@ -176,21 +176,26 @@ function About() {
 
 // Contact
 function Contact() {
-  const [mailSent, setMailSent] = useState(false);
-
-  const navigate = useNavigate();
-
-  const sendEmail = event => {
-    clickSound.volume = 0.5;
-    clickSound.currentTime = 0;
-    clickSound.play();
-    event.preventDefault();
-    console.log('Mail sent');
-    setMailSent(true);
-    setTimeout(() => navigate('/'), 1500)
-  }
 
   const {page} = useContext(pageDataContext);
+  const { register, handleSubmit, formState: { errors }, } = useForm();
+  const [mailSent, setMailSent] = useState(false);
+  const navigate = useNavigate();
+  const onSubmit = email => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    axios.post('http://localhost:5000', email, config);
+
+    emailSound.volume = 0.5;
+    emailSound.currentTime = 0;
+    emailSound.play();
+    setMailSent(true);
+    setTimeout(() => navigate('/'), 1500);
+  }
 
   if (mailSent) {
     return <Confirm />
@@ -199,19 +204,19 @@ function Contact() {
     return (
       <>
         <h1>Contact</h1>
-        <form ref={page} className="contact-form" onSubmit={event => sendEmail(event)}>
+        <form ref={page} className="contact-form" onSubmit={handleSubmit(onSubmit)}>
           <div className="name-box">
-            <div className="title-container first-name"><h6 className="title">First Name:</h6><span className="required">*</span></div>
-            <div className="title-container last-name"><h6 className="title">Last Name:</h6><span className="required">*</span></div>
-            <input className="input field first-name" type="text" />
-            <input className="input field last-name" type="text" />
+            <div className="title-container first-name"><h6 className="title">First Name:</h6>{errors.first && <span className="required">*</span>}</div>
+            <div className="title-container last-name"><h6 className="title">Last Name:</h6>{errors.last && <span className="required">*</span>}</div>
+            <input {...register("first", {required: true})} className="input field first-name" type="text" />
+            <input {...register("last", {required: true})} className="input field last-name" type="text" />
           </div>
-          <div className="title-container"><h6 className="title">Email:</h6><span className="required">*</span></div>
-          <input className="input field" type="text" />
-          <div className="title-container"><h6 className="title">Subject:</h6><span className="required">*</span></div>
-          <input className="input field" type="text" />
-          <div className="title-container"><h6 className="title">Body:</h6><span className="required">*</span></div>
-          <textarea className="input body"></textarea>
+          <div className="title-container"><h6 className="title">Email:</h6>{errors.email && <span className="required">*</span>}</div>
+          <input {...register("email", {required: true})} className="input field" type="text" />
+          <div className="title-container"><h6 className="title">Subject:</h6>{errors.subject && <span className="required">*</span>}</div>
+          <input {...register("subject", {required: true})} className="input field" type="text" />
+          <div className="title-container"><h6 className="title">Body:</h6>{errors.body && <span className="required">*</span>}</div>
+          <textarea {...register("body", {required: true})} className="input body"></textarea>
           <input className="accent send-btn gradient" type="submit" value="Send" />
         </form>
       </>
