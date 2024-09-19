@@ -111,7 +111,7 @@ function About() {
         </div>
       </div>
       <h1>Trevor Wheeler</h1>
-      <p className="text" ref={paragraph}>I'm a <span className="highlight">full-stack developer</span> located in the Greater <span className="highlight">Seattle</span> Area, most skilled in <span className="highlight">Python and JavaScript</span>, with a foundational <span className="highlight">background in C</span>. In addition to programming, I have <span className="highlight">experience in Linux</span> and managing web servers with <span className="highlight">Docker and AWS</span>. My goal as a developer is to build responsive, user-friendly web applications and continually expand my skill set with the <span className="highlight">newest technology</span>. Outside of programming, I have interests in music production and personal finance.</p>
+      <p className="text" ref={paragraph}>I'm a <span className="highlight">full-stack developer</span> located in the Greater <span className="highlight">Seattle</span> Area<span className='comma'>,</span> most skilled in <span className="highlight">Python and JavaScript<span className='comma'>,</span></span> with a foundational <span className="highlight">background in C.</span> In addition to programming<span className='comma'>,</span> I have <span className="highlight">experience in Linux</span> and managing web servers with <span className="highlight">Docker and AWS.</span> My goal as a developer is to build responsive<span className='comma'>,</span> user-friendly web applications and continually expand my skill set with the <span className="highlight">newest technology.</span> Outside of programming<span className='comma'>,</span> I have interests in music production and personal finance.</p>
       <h1>Featured Projects</h1>
       <div ref={page} className="projects">
         <div className="accent project">
@@ -147,7 +147,7 @@ function About() {
             <span className="tag">AWS</span>
           </div>
           <div className="project-links">
-            <a href="https://github.com/xXtrevorXx/Chrome-Extension" target="_blank"><i className="bi bi-github"></i></a>
+            <a href="https://github.com/xXtrevorXx/Portfolio" target="_blank"><i className="bi bi-github"></i></a>
             <a href="https://www.youtube.com/watch?v=0" target="_blank"><i className="bi bi-youtube"></i></a>
             <a href="/" target="_blank"><i className="bi bi-link-45deg"></i></a>
           </div>
@@ -163,7 +163,7 @@ function About() {
             <span className="tag">Manifest</span>
           </div>
           <div className="project-links">
-            <a href="https://github.com/xXtrevorXx/Portfolio" target="_blank"><i className="bi bi-github"></i></a>
+            <a href="https://github.com/xXtrevorXx/Chrome-Extension" target="_blank"><i className="bi bi-github"></i></a>
             <a href="https://www.youtube.com/watch?v=ej5fKXtoeTA" target="_blank"><i className="bi bi-youtube"></i></a>
             <a href="https://chromewebstore.google.com/detail/short-form-content-remova/bbobcnmcegmkheaimcepkmcmnaaomagn" target="_blank"><i className="bi bi-link-45deg"></i></a>
           </div>

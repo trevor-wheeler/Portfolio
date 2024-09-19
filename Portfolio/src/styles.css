@@ -121,6 +121,10 @@ nav {
     padding-inline: 20px;
 }
 
+.comma {
+    font-family: serif;
+}
+
 .theme-btn {
     height: 35px;
     width: 35px;
