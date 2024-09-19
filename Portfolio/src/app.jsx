@@ -131,7 +131,7 @@ function About() {
           <div className="project-links">
             <a href="https://github.com/xXtrevorXx/MIDI-Piano" target="_blank"><i className="bi bi-github"></i></a>
             <a href="https://www.youtube.com/watch?v=Kc5otcJNYwY" target="_blank"><i className="bi bi-youtube"></i></a>
-            <a href="/midi" target="_blank"><i className="bi bi-link-45deg"></i></a>
+            <a href="/midi" onClick={checkDevice} target="_blank"><i className="bi bi-link-45deg"></i></a>
           </div>
         </div>
         <div className="accent project">
@@ -172,6 +172,16 @@ function About() {
       <NavLink to="/projects" onClick={() => window.scrollTo(0, 0)}>View All <i className="bi bi-arrow-right"></i></NavLink>
     </>
   );
+}
+
+function checkDevice() {
+  function isChrome() {
+    return /Chrome/i.test(navigator.userAgent) && !/Edge|Edg/i.test(navigator.userAgent);
+  }
+
+  if (!isChrome()) {
+    alert('Warning: MIDI support only available in Chrome\n\nTo enable MIDI functionality please change your browser.');
+  }
 }
 
 // Contact
